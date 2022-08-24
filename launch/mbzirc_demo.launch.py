@@ -12,14 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Helpful function for getting the path to files in other packages,
+# e.g., launch files and configuration parameter files.
 from ament_index_python.packages import get_package_share_directory
 
+# The description of a launch-able system
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch.actions import ExecuteProcess
+
+# Actions allow user to express intent.
+# Similar to argparse - specifies command-line args with `ros2 launch`
+from launch.actions import DeclareLaunchArgument
+# Used to include/source a Python launch file from elsewhere
+from launch.actions import IncludeLaunchDescription
+#from launch.actions import ExecuteProcess
 from launch.actions import OpaqueFunction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch.substitutions import PathJoinSubstitution
+from launch_ros.substitutions import FindPackageShare
 
 from launch_ros.actions import Node
 
@@ -31,12 +41,22 @@ def launch(context, *args, **kwargs):
 
     ign_args = LaunchConfiguration('ign_args').perform(context)
 
-    ign_gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(
-        get_package_share_directory('ros_ign_gazebo'), 'launch'),
-        '/ign_gazebo.launch.py']),
-        launch_arguments = {'ign_args': ign_args}.items())
+    #ign_gazebo = IncludeLaunchDescription(
+    #    PythonLaunchDescriptionSource([os.path.join(
+    #    get_package_share_directory('ros_ign_gazebo'), 'launch'),
+    #    '/ign_gazebo.launch.py']),
+    #    launch_arguments = {'ign_args': ign_args}.items())
 
+
+    ign_gazebo = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([FindPackageShare('ros_ign_gazebo'),
+                                  'launch',
+                                  'ign_gazebo.launch.py'
+            ])
+        ]),
+        launch_arguments = {'ign_args': ign_args}.items())
+    
 
     bridges = [
       mbzirc_ign.bridges.score(),
