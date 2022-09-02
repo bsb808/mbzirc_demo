@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 
 <sdf version="1.9">
-  <world name="omx_simple_demo">
+  <world name="mbzirc_ocandemo">
 
     <physics name="4ms" type="dart">
       <max_step_size>0.004</max_step_size>
@@ -136,7 +136,7 @@
             <specular>0.8 0.8 0.8 1</specular>
               <pbr>
                   <metal>
-                      <albedo_map>https://infuel.ignitionrobotics.org/1.0/OpenRobotics/models/Cave Straight Type A/tip/files/materials/textures/Gravel_Albedo.jpg</albedo_map>
+                      <albedo_map>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Cave Straight Type A/tip/files/materials/textures/Gravel_Albedo.jpg</albedo_map>
                       <normal_map>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Cave Straight Type A/tip/files/materials/textures/Gravel_Normal.jpg</normal_map>
                       <roughness_map>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Cave Straight Type A/tip/files/materials/textures/Gravel_Roughness.jpg</roughness_map>
                   </metal>
